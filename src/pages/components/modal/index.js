@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import { Button } from '@material-ui/core';
+import { Button, Backdrop, Fade, Modal } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -37,10 +34,13 @@ const useStyles = makeStyles((theme) => ({
 
     return (
       <div>
-        <Button type="button" onClick={handleOpen} variant="contained" style={{ backgroundColor:"#ffffff",marginRight:"10px"}}>
+        <Button variant="contained" name={'Home'} style={{ backgroundColor:"#ffffff", marginRight:"10px"}}>
+          Home
+        </Button>
+        <Button type="button" onClick={handleOpen} data-tut={'Login'} variant="contained" style={{ backgroundColor:"#ffffff",marginRight:"10px"}}>
           Login
         </Button>
-        <Button variant="contained" style={{ backgroundColor:"#ffffff"}}>
+        <Button variant="contained" data-tut={'Registre-se'} style={{ backgroundColor:"#ffffff"}}>
           Registre-se
         </Button>
         <Modal

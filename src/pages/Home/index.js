@@ -8,13 +8,16 @@ import ModalDilog from '../components/modal';
 
 
 
-export default function Home() {
+export default function Home({
+  setIsTourOpen,
+  toggleShowMore
+}) {
   return (
     <>
       <CssBaseline />
         <AppBar position="absolute">
           <Toolbar >
-            <MenuLateral />
+            <MenuLateral setIsTourOpen={setIsTourOpen} toggleShowMore={toggleShowMore}/>
             <Grid
               container
               direction="row"
@@ -36,7 +39,8 @@ export default function Home() {
           style={{display:'flex', minHeight: '100vh'}}
         > 
 
-          <Grid maxWidth="sm" style={{ display:'flex', height: "inherit", paddingTop: "100px"}}>
+          <Grid maxWidth="sm" data-tut={'Teste'} style={{ display:'flex', height: "inherit", paddingTop: "100px"}}>
+            <h1> TESTE </h1>
           </Grid>
       </Grid> 
     </>

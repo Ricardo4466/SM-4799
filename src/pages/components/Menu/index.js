@@ -1,16 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Grid } from '@material-ui/core';
+import { Grid, Drawer, List, Divider, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
@@ -26,11 +20,12 @@ const useStyles = makeStyles({
   }
 });
 
-export default function MenuLateral() {
+export default function MenuLateral({
+  setIsTourOpen
+}) {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    left: false,
-  });
+  const [state, setState] = useState({ left: false });
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -38,6 +33,7 @@ export default function MenuLateral() {
     }
 
     setState({ ...state, [anchor]: open });
+    setIsTourOpen(open)
   };
 
   const list = (anchor) => (
@@ -50,24 +46,26 @@ export default function MenuLateral() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Viagens', 'Pacotes', 'email', 'Pacotes promocionais'].map((text, index) => (
+        {['Viagens', 'Pacotes', 'Email', 'Pacotes promocionais'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={text}  data-tut={text}/>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['Histórico de viagens', 'Meus emails', 'favoritos'].map((text, index) => (
+        {['Histórico', 'Meus Emails', 'Favoritos'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={text}  data-tut={text}/>
           </ListItem>
         ))}
       </List>
     </div>
   );
+
+
 
   return (
     <div style={{display: "flex"}}>
@@ -81,7 +79,6 @@ export default function MenuLateral() {
           >
             <MenuIcon style={{fontSize: "50px", marginRight:'10vh', }} onClick={toggleDrawer(anchor, true)}>{anchor}</MenuIcon>   
           </Grid>
-
           <Drawer 
           anchor={anchor} 
           open={state[anchor]} 
