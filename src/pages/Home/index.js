@@ -41,6 +41,7 @@ export default function Home({
 
           <Grid maxWidth="sm" data-tut={'Teste'} style={{ display:'flex', height: "inherit", paddingTop: "100px"}}>
             <h1> TESTE </h1>
+            
           </Grid>
       </Grid> 
     </>

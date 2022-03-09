@@ -80,9 +80,11 @@ export default function MenuLateral({
             <MenuIcon style={{fontSize: "50px", marginRight:'10vh', }} onClick={toggleDrawer(anchor, true)}>{anchor}</MenuIcon>   
           </Grid>
           <Drawer 
+          BackdropProps={{ invisible: true }}
           anchor={anchor} 
           open={state[anchor]} 
-          onClose={toggleDrawer(anchor, false)}>
+          onClose={toggleDrawer(anchor, false)}
+          >
             {list(anchor)}
           </Drawer> 
         </>

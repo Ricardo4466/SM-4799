@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import Tour from "reactour"
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import Router from "./router"
 
 const tourConfig = [
@@ -61,6 +62,12 @@ const tourConfig = [
     selector: '[data-tut="Teste"]',
     content: `Titulo principal `
   },
+  {
+    selector: '[data-tour="open_modal"]',
+    content:'Teste',
+    highlightedSelectors: ['.classe.modal'],
+    mutationObservables: ['#portaaal'],
+  },
 ];
 
 function App() {
@@ -70,8 +77,8 @@ function App() {
 
   const accentColor = "#5cb7b7"
 
-  // const disableBody = target => disableBodyScroll(target)
-  // const enableBody = target => enableBodyScroll(target)
+  const disableBody = target => disableBodyScroll(target)
+  const enableBody = target => enableBodyScroll(target)
 
   const toggleShowMore = () => {
     setIsShowingMore(prevState => ({
@@ -85,14 +92,15 @@ function App() {
         setIsTourOpen={setIsTourOpen}
         toggleShowMore={toggleShowMore} />
       <Tour
-        onRequestClose={() => {setIsTourOpen(false)}}
         steps={tourConfig}
+        onRequestClose={() => {setIsTourOpen(false)}}
         isOpen={isTourOpen}
-        className="helper"
+        // className="helper"
         rounded={5}
-        accentColor={accentColor}
-        // onAfterOpen={disableBody}
-        // onBeforeClose={enableBody}
+        onAfterOpen={disableBody}
+        onBeforeClose={enableBody}
+        BackdropProps={{ invisible: true }}
+       
       />
     </>
   );
